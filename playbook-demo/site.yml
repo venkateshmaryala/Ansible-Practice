@@ -14,6 +14,12 @@
            name: httpd
            state: started
            enabled: yes
+           
+        - name: Enable and Start service firewalld, if not started
+          service:
+           name: firewalld
+           state: started
+           enable: yes  
 
         - name: service info
           shell:
