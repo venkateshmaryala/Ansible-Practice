@@ -19,7 +19,19 @@
           service:
            name: firewalld
            state: started
-           enabled: yes  
+           enabled: yes
+          
+        - name: open firewall ports
+          firewalld: 
+           service: httpd
+           permanent: yes
+           state: enabled
+           immediate: yes
+         
+        - name: copy html content
+          copy:
+           content: "welcome to the venkys web"
+           dest: /var/www/html/index.html 
 
         - name: service info
           shell:
