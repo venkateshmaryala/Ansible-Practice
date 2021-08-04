@@ -32,6 +32,10 @@
           copy:
            content: "welcome to the venkys web"
            dest: /var/www/html/index.html 
+           
+        - name: Check that you can connect (GET) to a page and it returns a status 200
+          uri:
+           url: http://node1   
 
         - name: service info
           shell:
