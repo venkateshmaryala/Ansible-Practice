@@ -4,14 +4,17 @@
     become: yes
     vars:
     vars_files:
-        - vars.yml
+     #   - vars.yml #adding  variables page ----222222
 
-     # web_package: "httpd"
+     # web_package: "httpd"  #varialbe defining in same playbook--1
      # web_service: "httpd"
      # firewall_package: "firewalld"
      # firewall_service: "firewalld"
      # nginx_package: "nginx"
     tasks:
+        - name: Include vars
+          include_vars: vars.yml
+
         - name: Install {{web_package}} & {{firewall_package}}
           yum :
            name:
