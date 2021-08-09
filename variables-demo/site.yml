@@ -1,0 +1,68 @@
+---
+  - name: Install and configure httpd
+    hosts : nodes
+    become: yes
+    vars:
+    vars_files:
+        - vars.yml
+
+     # web_package: "httpd"
+     # web_service: "httpd"
+     # firewall_package: "firewalld"
+     # firewall_service: "firewalld"
+     # nginx_package: "nginx"
+    tasks:
+        - name: Install {{web_package}} & {{firewall_package}}
+          yum :
+           name:
+             - "{{web_package}}"
+             - "{{firewall_package}}"
+           state: latest
+
+        - name: Start service {{web_service}}, if not started
+          service:
+           name: "{{web_service}}"
+           state: started
+           enabled: yes
+           
+        - name: Enable and Start service {{firewall_service}}, if not started
+          service:
+           name: "{{firewall_package}}"
+           state: started
+           enabled: yes
+          
+        - name: open firewall ports
+          firewalld: 
+           service: http
+           permanent: yes
+           state: enabled
+           immediate: yes
+        
+        - name: install one more software called {{nginx_package}}
+          yum :
+           name: 
+           - "{{nginx_package}}"
+           state: latest
+         
+        - name: copy html content
+          copy:
+           content: "welcome to the venkys web"
+           dest: /var/www/html/index.html 
+           
+   
+        - name: service info
+          shell:
+           cmd: systemctl status httpd
+           
+  - name: Check that you can connect (GET) to a page and it returns a status 200
+    hosts: localhost
+    become: no
+    tasks:
+    - name: conntect to the webserver
+      uri:
+       url: http://node1
+       status_code: 200
+       return_content: yes
+      
+
+      
