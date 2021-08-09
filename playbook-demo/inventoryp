@@ -1,3 +1,7 @@
 [nodes]
 node1
 node2
+#google.com
+
+[myself]
+localhost ansible_connection=local

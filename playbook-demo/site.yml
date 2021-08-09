@@ -38,11 +38,15 @@
           shell:
            cmd: systemctl status httpd
            
-- name: Check that you can connect (GET) to a page and it returns a status 200
-  hosts: localhost
-  become: no
-  tasks:
-  - name: conntect to the webserver
-    uri:
-     url: http://node1
-     status_code: 200
+  - name: Check that you can connect (GET) to a page and it returns a status 200
+    hosts: localhost
+    become: no
+    tasks:
+    - name: conntect to the webserver
+      uri:
+       url: http://node1
+       status_code: 200
+       return_content: yes
+      
+
+      
