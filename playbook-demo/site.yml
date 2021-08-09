@@ -27,6 +27,12 @@
            permanent: yes
            state: enabled
            immediate: yes
+        
+        - name: install one more software
+          yum :
+           name: 
+           - nginx
+           state: latest
          
         - name: copy html content
           copy:
