@@ -1,7 +1,11 @@
 [nodes]
-node1
-node2
+node1 #ansible_user=devops
+node2 #ansible_user=vagrant
 #google.com
+
+
+#[nodes:vars]
+#ansible_user = devops
 
 [myself]
 localhost ansible_connection=local

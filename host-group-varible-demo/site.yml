@@ -2,8 +2,8 @@
   - name: Install and configure httpd
     hosts : "{{my_nodes}}"
     become: yes
-    vars:
-    vars_files:
+#    vars:    ---------333333
+ #   vars_files:------------333333
      #   - vars.yml #adding  variables page ----222222
 
      # web_package: "httpd"  #varialbe defining in same playbook--1
@@ -12,8 +12,8 @@
      # firewall_service: "firewalld"
      # nginx_package: "nginx"
     tasks:
-        - name: Include vars
-          include_vars: vars.yml
+  #      - name: Include vars------33333333333
+  #        include_vars: vars.yml----------33333333333333
 
         - name: Install {{web_package}} & {{firewall_package}}
           yum :
@@ -41,16 +41,16 @@
            state: enabled
            immediate: yes
         
-        - name: install one more software called {{nginx_package}}
-          yum :
-           name: 
-           - "{{nginx_package}}"
-           state: latest
-         
-        - name: copy html content
-          copy:
-           content: "welcome to the venkys web"
-           dest: /var/www/html/index.html 
+  #      - name: install one more software called {{nginx_package}}
+   #       yum :
+    #       name: 
+     #      - "{{nginx_package}}"
+      #     state: latest
+       #  
+        #- name: copy html content
+         # copy:
+          # content: "welcome to the venkys web"
+           #dest: /var/www/html/index.html 
            
    
         - name: service info
