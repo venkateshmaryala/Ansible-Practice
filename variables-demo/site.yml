@@ -1,6 +1,6 @@
 ---
   - name: Install and configure httpd
-    hosts : nodes
+    hosts : "{{my_nodes}}"
     become: yes
     vars:
     vars_files:
@@ -55,7 +55,7 @@
    
         - name: service info
           shell:
-           cmd: systemctl status httpd
+           cmd: systemctl status {{web_service}} 
            
   - name: Check that you can connect (GET) to a page and it returns a status 200
     hosts: localhost
